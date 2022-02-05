@@ -1,36 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:simple_app/router/app_router.gr.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final _rootRouter = AppRouter();
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Simple App',
+    return MaterialApp.router(
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.brown,
       ),
-      home: const MyHomePage(),
+      routerDelegate: _rootRouter.delegate(),
+      routeInformationProvider: _rootRouter.routeInfoProvider(),
+      routeInformationParser: _rootRouter.defaultRouteParser(),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-      title: const Text("Hello, Flutter!"),
-    ));
   }
 }
