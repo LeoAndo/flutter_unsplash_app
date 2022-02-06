@@ -42,10 +42,8 @@ class AppRouter extends _i2.RootStackRouter {
           routeData: routeData, child: const _i4.SettingsPage());
     },
     PhotoListRoute.name: (routeData) {
-      final args = routeData.argsAs<PhotoListRouteArgs>(
-          orElse: () => const PhotoListRouteArgs());
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i5.PhotoListPage(key: args.key));
+          routeData: routeData, child: const _i5.PhotoListPage());
     },
     PhotoDetailsRoute.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
@@ -114,23 +112,10 @@ class SettingsTab extends _i2.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.PhotoListPage]
-class PhotoListRoute extends _i2.PageRouteInfo<PhotoListRouteArgs> {
-  PhotoListRoute({_i7.Key? key})
-      : super(PhotoListRoute.name,
-            path: '', args: PhotoListRouteArgs(key: key));
+class PhotoListRoute extends _i2.PageRouteInfo<void> {
+  const PhotoListRoute() : super(PhotoListRoute.name, path: '');
 
   static const String name = 'PhotoListRoute';
-}
-
-class PhotoListRouteArgs {
-  const PhotoListRouteArgs({this.key});
-
-  final _i7.Key? key;
-
-  @override
-  String toString() {
-    return 'PhotoListRouteArgs{key: $key}';
-  }
 }
 
 /// generated route for
