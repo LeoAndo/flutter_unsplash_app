@@ -6,11 +6,6 @@ class Todo {
   bool? done;
 
   Todo();
-  // Todo({
-  //   required this.id,
-  //   required this.title,
-  //   required this.done,
-  // });
 
   Todo.fromMap(Map map) {
     id = map[columnId] as int?;

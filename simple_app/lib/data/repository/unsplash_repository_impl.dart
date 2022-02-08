@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:simple_app/data/api/responses/unsplash/unsplash_response.dart';
-import 'package:simple_app/data/api/unsplash_data_source.dart';
+import 'package:simple_app/data/api/unsplash_api.dart';
 import 'package:simple_app/data/models/result.dart';
 import 'package:simple_app/data/repository/unsplash_repository.dart';
 
@@ -12,14 +12,14 @@ class UnsplashRepositoryImpl implements UnsplashRepository {
 
   final Reader _reader;
 
-  late final UnsplashDataSource _dataSource =
-      _reader(unsplashDataSourceProvider);
+  late final UnsplashApi _dataSource = _reader(unsplashDataSourceProvider);
 
   @override
-  Future<Result<UnsplashResponse>> getUnsplashPhoto() {
+  Future<Result<UnsplashResponse>> searchPhotos(
+      [query = "dogs", page = 1, perPage = 10]) {
     return Result.guardFuture(
-      () async =>
-          await _dataSource.searchPhotos(query: "dogs", page: 1, perPage: 10),
+      () async => await _dataSource.searchPhotos(
+          query: query, page: page, perPage: perPage),
     );
   }
 }

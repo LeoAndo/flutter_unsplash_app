@@ -13,11 +13,11 @@
 import 'package:auto_route/auto_route.dart' as _i2;
 import 'package:flutter/material.dart' as _i7;
 
-import '../screens/home/home_page.dart' as _i1;
-import '../screens/photo/photo_details_page.dart' as _i6;
-import '../screens/photo/photo_list_page.dart' as _i5;
-import '../screens/settings/settings_page.dart' as _i4;
-import '../screens/todo/todo_page.dart' as _i3;
+import '../pages/home/home_page.dart' as _i1;
+import '../pages/photo/photo_details_page.dart' as _i6;
+import '../pages/photo/photo_list_page.dart' as _i5;
+import '../pages/settings/settings_page.dart' as _i4;
+import '../pages/todo/todo_page.dart' as _i3;
 
 class AppRouter extends _i2.RootStackRouter {
   AppRouter([_i7.GlobalKey<_i7.NavigatorState>? navigatorKey])
