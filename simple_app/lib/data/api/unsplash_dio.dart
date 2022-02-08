@@ -4,10 +4,10 @@ import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:simple_app/secrets/api_key.dart';
 
-final dioProvider = Provider((_) => AppDio.getInstance());
+final dioProvider = Provider((_) => UnsplashDio.getInstance());
 
-class AppDio with DioMixin implements Dio {
-  AppDio._([BaseOptions? options]) {
+class UnsplashDio with DioMixin implements Dio {
+  UnsplashDio._([BaseOptions? options]) {
     options = BaseOptions(
       baseUrl: 'https://api.unsplash.com/',
       contentType: 'application/json',
@@ -33,5 +33,5 @@ class AppDio with DioMixin implements Dio {
     httpClientAdapter = DefaultHttpClientAdapter();
   }
 
-  static Dio getInstance() => AppDio._();
+  static Dio getInstance() => UnsplashDio._();
 }
