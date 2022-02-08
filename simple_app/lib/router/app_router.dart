@@ -23,7 +23,7 @@ import 'package:simple_app/screens/todo/todo_page.dart';
               page: PhotoListPage,
             ),
             AutoRoute(
-              path: ':id',
+              path: ':username',
               page: PhotoDetailsPage,
               meta: {'hideBottomNav': true},
             ),

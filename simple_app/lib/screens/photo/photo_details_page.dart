@@ -2,10 +2,10 @@ import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 
 class PhotoDetailsPage extends StatefulWidget {
-  final int id;
+  final String username;
   const PhotoDetailsPage({
     Key? key,
-    @PathParam('id') this.id = -1,
+    @PathParam('username') this.username = "unKnown",
   }) : super(key: key);
 
   @override
@@ -15,6 +15,6 @@ class PhotoDetailsPage extends StatefulWidget {
 class _PhotoDetailsPageState extends State<PhotoDetailsPage> {
   @override
   Widget build(BuildContext context) {
-    return Text("id: " + widget.id.toString());
+    return Text("username: " + widget.username);
   }
 }
