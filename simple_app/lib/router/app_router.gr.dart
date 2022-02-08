@@ -13,11 +13,11 @@
 import 'package:auto_route/auto_route.dart' as _i2;
 import 'package:flutter/material.dart' as _i7;
 
-import '../screens/home/home_page.dart' as _i1;
-import '../screens/photo/photo_details_page.dart' as _i6;
-import '../screens/photo/photo_list_page.dart' as _i5;
-import '../screens/settings/settings_page.dart' as _i4;
-import '../screens/todo/todo_page.dart' as _i3;
+import '../pages/home/home_page.dart' as _i1;
+import '../pages/photo/photo_details_page.dart' as _i6;
+import '../pages/photo/photo_list_page.dart' as _i5;
+import '../pages/settings/settings_page.dart' as _i4;
+import '../pages/todo/todo_page.dart' as _i3;
 
 class AppRouter extends _i2.RootStackRouter {
   AppRouter([_i7.GlobalKey<_i7.NavigatorState>? navigatorKey])
@@ -48,10 +48,11 @@ class AppRouter extends _i2.RootStackRouter {
     PhotoDetailsRoute.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
       final args = routeData.argsAs<PhotoDetailsRouteArgs>(
-          orElse: () => PhotoDetailsRouteArgs(id: pathParams.getInt('id', -1)));
+          orElse: () => PhotoDetailsRouteArgs(
+              username: pathParams.getString('username', "unKnown")));
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i6.PhotoDetailsPage(key: args.key, id: args.id));
+          child: _i6.PhotoDetailsPage(key: args.key, username: args.username));
     }
   };
 
@@ -65,7 +66,7 @@ class AppRouter extends _i2.RootStackRouter {
                 _i2.RouteConfig(PhotoListRoute.name,
                     path: '', parent: PhotoTab.name),
                 _i2.RouteConfig(PhotoDetailsRoute.name,
-                    path: ':id',
+                    path: ':username',
                     parent: PhotoTab.name,
                     meta: <String, dynamic>{'hideBottomNav': true})
               ]),
@@ -121,24 +122,24 @@ class PhotoListRoute extends _i2.PageRouteInfo<void> {
 /// generated route for
 /// [_i6.PhotoDetailsPage]
 class PhotoDetailsRoute extends _i2.PageRouteInfo<PhotoDetailsRouteArgs> {
-  PhotoDetailsRoute({_i7.Key? key, int id = -1})
+  PhotoDetailsRoute({_i7.Key? key, String username = "unKnown"})
       : super(PhotoDetailsRoute.name,
-            path: ':id',
-            args: PhotoDetailsRouteArgs(key: key, id: id),
-            rawPathParams: {'id': id});
+            path: ':username',
+            args: PhotoDetailsRouteArgs(key: key, username: username),
+            rawPathParams: {'username': username});
 
   static const String name = 'PhotoDetailsRoute';
 }
 
 class PhotoDetailsRouteArgs {
-  const PhotoDetailsRouteArgs({this.key, this.id = -1});
+  const PhotoDetailsRouteArgs({this.key, this.username = "unKnown"});
 
   final _i7.Key? key;
 
-  final int id;
+  final String username;
 
   @override
   String toString() {
-    return 'PhotoDetailsRouteArgs{key: $key, id: $id}';
+    return 'PhotoDetailsRouteArgs{key: $key, username: $username}';
   }
 }
