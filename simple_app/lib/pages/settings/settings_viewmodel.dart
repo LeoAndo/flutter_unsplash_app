@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:simple_app/data/models/result.dart';
 import 'package:simple_app/data/repository/user_settings_repository.dart';
 import 'package:simple_app/data/repository/user_settings_repository_impl.dart';
 

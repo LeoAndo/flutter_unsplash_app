@@ -1,4 +1,4 @@
-import 'package:simple_app/data/database/todo_provider.dart';
+import 'package:simple_app/data/database/todo_dao.dart';
 
 class Todo {
   int? id;

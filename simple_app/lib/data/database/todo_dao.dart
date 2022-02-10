@@ -14,7 +14,7 @@ const String columnTitle = 'title';
 /// done column name
 const String columnDone = 'done';
 
-class TodoProvider {
+class TodoDao {
   /// Open the database.
   Future<Database> _openDatabase({bool readOnly = false}) async {
     final path = await initDb('todo.db');
