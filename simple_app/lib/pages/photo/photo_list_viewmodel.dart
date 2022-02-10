@@ -25,16 +25,16 @@ class PhotoListViewModel extends ChangeNotifier {
     _uiState = const PhotoListUiState.loading();
     final ret = await _repository.searchPhotos();
     ret.when(
-        success: (data) => {handleSuccess(data)},
-        failure: (error) => {handleFailure(error)});
+        success: (data) => {_handleSuccess(data)},
+        failure: (error) => {_handleFailure(error)});
   }
 
-  handleSuccess(UnsplashResponse data) {
+  _handleSuccess(UnsplashResponse data) {
     _uiState = PhotoListUiState(data);
     notifyListeners();
   }
 
-  handleFailure(AppError error) {
+  _handleFailure(AppError error) {
     switch (error.type) {
       case AppErrorType.unauthorized:
         _uiState =
