@@ -4,6 +4,7 @@ import 'package:simple_app/pages/photo/photo_details_page.dart';
 import 'package:simple_app/pages/photo/photo_list_page.dart';
 import 'package:simple_app/pages/settings/settings_page.dart';
 import 'package:simple_app/pages/todo/todo_page.dart';
+export 'app_router.gr.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page|Dialog,Route',

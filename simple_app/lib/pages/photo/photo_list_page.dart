@@ -12,6 +12,7 @@ class PhotoListPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // final l10n = useL10n();
     final homeViewModel = ref.read(photoListViewModelProvider);
     final photos =
         ref.watch(photoListViewModelProvider.select((value) => value.photos));
