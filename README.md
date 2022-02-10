@@ -17,6 +17,7 @@ https://github.com/LeoAndo/flutter-app-templates/issues<br>
 https://github.com/LeoAndo/flutter-app-templates/pulls?q=is%3Apr+is%3Aclosed<br>
 
 # refs
+https://github.com/filiph?tab=repositories<br>
 https://github.com/wasabeef/flutter-architecture-blueprints<br>
 https://github.com/brianegan/flutter_architecture_samples<br>
 https://github.com/mkobuolys/flutter-design-patterns<br>
