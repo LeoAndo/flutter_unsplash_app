@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:simple_app/data/preferences/app_preferences_manager.dart';
 
-import 'user_settings_repository.dart';
+import '../../domain/repositories/user_settings_repository.dart';
 
 final userSettingsRepositoryProvider =
     Provider((ref) => UserSettingsRepositoryImpl(ref.read));

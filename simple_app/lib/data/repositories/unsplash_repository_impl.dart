@@ -2,7 +2,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:simple_app/data/api/responses/unsplash/unsplash_response.dart';
 import 'package:simple_app/data/api/unsplash_api.dart';
 import 'package:simple_app/data/models/result.dart';
-import 'package:simple_app/data/repository/unsplash_repository.dart';
+import 'package:simple_app/domain/repositories/unsplash_repository.dart';
 
 final unsplashRepositoryProvider =
     Provider((ref) => UnsplashRepositoryImpl(ref.read));

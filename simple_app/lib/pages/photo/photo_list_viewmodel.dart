@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:simple_app/data/api/responses/unsplash/unsplash_response.dart';
 import 'package:simple_app/data/app_error.dart';
-import 'package:simple_app/data/repository/unsplash_repository.dart';
-import 'package:simple_app/data/repository/unsplash_repository_impl.dart';
+import 'package:simple_app/domain/repositories/unsplash_repository.dart';
+import 'package:simple_app/data/repositories/unsplash_repository_impl.dart';
 import 'package:simple_app/pages/photo/photo_list_ui_state.dart';
 
 final photoListViewModelProvider =
