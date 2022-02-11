@@ -5,7 +5,7 @@ part 'photo_list_ui_state.freezed.dart';
 part 'photo_list_ui_state.g.dart';
 
 @freezed
-class PhotoListUiState with _$PhotoListUiState {
+abstract class PhotoListUiState with _$PhotoListUiState {
   const factory PhotoListUiState.initial() = Initial;
   const factory PhotoListUiState(UnsplashResponse value) = Data;
   const factory PhotoListUiState.loading() = Loading;

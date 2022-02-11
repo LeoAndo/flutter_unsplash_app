@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:simple_app/data/repository/user_settings_repository.dart';
-import 'package:simple_app/data/repository/user_settings_repository_impl.dart';
+import 'package:simple_app/domain/repositories/user_settings_repository.dart';
+import 'package:simple_app/data/repositories/user_settings_repository_impl.dart';
 
 final settingsViewModelProvider =
     ChangeNotifierProvider((ref) => SettingsViewModel(ref.read));
