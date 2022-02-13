@@ -19,16 +19,16 @@ class TodoPage extends HookConsumerWidget {
     final Widget widget = uiState.when(
         (values) => _buildSuccessWidget(
               values,
-              textEditingController,
-              (todo) => viewModel.updateTodoData(todo),
-              () => {
+              editController: textEditingController,
+              onTapCardItem: (todo) => viewModel.updateTodoData(todo),
+              onPressedAddButton: () => {
                 if (textEditingController.text.isNotEmpty)
                   {
                     viewModel.addTodoData(
                         Todo(title: textEditingController.text, done: false))
                   }
               },
-              () => viewModel.deleteTodoItems(),
+              onPressedDeleteButton: () => viewModel.deleteTodoItems(),
             ),
         initial: () => Container(),
         error: (error) => Center(child: Text(error)));
@@ -36,13 +36,12 @@ class TodoPage extends HookConsumerWidget {
   }
 
   _buildSuccessWidget(
-    List<Todo> _todoList,
-    TextEditingController textEditingController,
-    void Function(Todo) onTapCardItem,
-    void Function() onPressedAddButton,
-    void Function() onPressedDeleteButton,
-  ) {
-    print("_buildSuccessWidget");
+    List<Todo> _todoList, {
+    required TextEditingController editController,
+    required void Function(Todo) onTapCardItem,
+    required void Function() onPressedAddButton,
+    required void Function() onPressedDeleteButton,
+  }) {
     return Scaffold(
       body: Container(
         child: Column(
@@ -50,7 +49,7 @@ class TodoPage extends HookConsumerWidget {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
-                controller: textEditingController,
+                controller: editController,
                 obscureText: false,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
