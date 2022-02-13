@@ -20,21 +20,17 @@ final todoDatabaseOpenHelperProvider =
 
 class TodoDatabaseOpenHelper {
   /// Open the database.
-  Future<Database> _getDatabase({bool readOnly = false}) async {
+  Future<Database> _getDatabase() async {
     final path = await initDatabase('todo.db');
-    if (readOnly) {
-      return await openReadOnlyDatabase(path);
-    } else {
-      return await openDatabase(path, version: 1,
-          onCreate: (Database db, int version) async {
-        await db.execute('''
+    return await openDatabase(path, version: 1,
+        onCreate: (Database db, int version) async {
+      await db.execute('''
                             create table $tableTodo ( 
                               $columnId integer primary key autoincrement, 
                               $columnTitle text not null,
                               $columnDone integer not null)
                             ''');
-      });
-    }
+    });
   }
 
   /// Insert a todo.
@@ -48,7 +44,7 @@ class TodoDatabaseOpenHelper {
 
   /// Get a todo.
   Future<TodoEntity> getTodo(int id) async {
-    final db = await _getDatabase(readOnly: true);
+    final db = await _getDatabase();
     final List<Map> maps = await db.query(tableTodo,
         columns: [columnId, columnDone, columnTitle],
         where: '$columnId = ?',
@@ -60,7 +56,7 @@ class TodoDatabaseOpenHelper {
   }
 
   Future<List<TodoEntity>> findTodoList() async {
-    final db = await _getDatabase(readOnly: false);
+    final db = await _getDatabase();
     final List<Map<String, dynamic>> maps = await db.query(tableTodo);
     return List.generate(maps.length, (i) {
       return TodoEntity.fromMap(maps[i]);
