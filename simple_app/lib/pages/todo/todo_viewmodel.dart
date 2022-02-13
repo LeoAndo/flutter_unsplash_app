@@ -26,20 +26,14 @@ class TodoViewModel extends ChangeNotifier {
   TodoUiState _uiState = const TodoUiState.initial();
   TodoUiState get uiState => _uiState;
 
-  Future<void> addTodoData(Todo todo) async {
-    await _repository.addTodoItem(todo);
-    await fetchTodoList();
-  }
+  Future<void> addTodoData(Todo todo) async =>
+      await _repository.addTodoItem(todo).whenComplete(() => fetchTodoList());
 
-  Future<void> updateTodoData(Todo todo) async {
-    await _usecase.execute(todo);
-    await fetchTodoList();
-  }
+  Future<void> updateTodoData(Todo todo) async =>
+      await _usecase.execute(todo).whenComplete(() => fetchTodoList());
 
-  Future<void> deleteTodoItems() async {
-    await _repository.deleteTodoItems();
-    await fetchTodoList();
-  }
+  Future<void> deleteTodoItems() async =>
+      await _repository.deleteTodoItems().whenComplete(() => fetchTodoList());
 
   Future<void> fetchTodoList() async {
     var ret = await _repository.findTodoItems();
