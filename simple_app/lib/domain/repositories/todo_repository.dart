@@ -6,4 +6,5 @@ abstract class TodoRepository {
   Future<void> updateTodoItem(Todo todo);
   Future<void> deleteTodoItems();
   Future<Result<List<Todo>>> findTodoItems();
+  Future<Result<Todo>> findTodoItemById(int id);
 }

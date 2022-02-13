@@ -26,11 +26,13 @@ class TodoViewModel extends ChangeNotifier {
   TodoUiState _uiState = const TodoUiState.initial();
   TodoUiState get uiState => _uiState;
 
-  Future<void> addTodoData(Todo todo) async =>
-      await _repository.addTodoItem(todo).whenComplete(() => fetchTodoList());
+  Future<void> addTodoData({required String title, required bool done}) async =>
+      await _repository
+          .addTodoItem(Todo(title: title, done: done))
+          .whenComplete(() => fetchTodoList());
 
-  Future<void> updateTodoData(Todo todo) async =>
-      await _usecase.execute(todo).whenComplete(() => fetchTodoList());
+  Future<void> updateTodoData({required int id}) async =>
+      await _usecase.execute(id).whenComplete(() => fetchTodoList());
 
   Future<void> deleteTodoItems() async =>
       await _repository.deleteTodoItems().whenComplete(() => fetchTodoList());

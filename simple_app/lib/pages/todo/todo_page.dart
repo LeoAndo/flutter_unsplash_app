@@ -20,12 +20,12 @@ class TodoPage extends HookConsumerWidget {
         (values) => _buildSuccessWidget(
               values,
               editController: textEditingController,
-              onTapCardItem: (todo) => viewModel.updateTodoData(todo),
+              onTapCardItem: (id) => viewModel.updateTodoData(id: id),
               onPressedAddButton: () => {
                 if (textEditingController.text.isNotEmpty)
                   {
                     viewModel.addTodoData(
-                        Todo(title: textEditingController.text, done: false))
+                        title: textEditingController.text, done: false)
                   }
               },
               onPressedDeleteButton: () => viewModel.deleteTodoItems(),
@@ -38,7 +38,7 @@ class TodoPage extends HookConsumerWidget {
   _buildSuccessWidget(
     List<Todo> _todoList, {
     required TextEditingController editController,
-    required void Function(Todo) onTapCardItem,
+    required void Function(int) onTapCardItem,
     required void Function() onPressedAddButton,
     required void Function() onPressedDeleteButton,
   }) {
@@ -71,8 +71,7 @@ class TodoPage extends HookConsumerWidget {
                           subtitle: Text('isDone: ${item.done}'),
                         ),
                       ),
-                      onTap: () => onTapCardItem(
-                          Todo(id: item.id, title: item.title, done: true)),
+                      onTap: () => onTapCardItem(item.id!),
                     );
                   }),
             ),
