@@ -1,62 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:simple_app/data/database/todo_dao.dart';
-import 'package:simple_app/data/models/todo.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:simple_app/domain/models/todo.dart';
+import 'package:simple_app/pages/todo/todo_viewmodel.dart';
 
-class TodoPage extends StatefulWidget {
+class TodoPage extends HookConsumerWidget {
   const TodoPage({Key? key}) : super(key: key);
 
   @override
-  _TodoPageState createState() => _TodoPageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final viewModel = ref.read(todoViewModelProvider);
+    useFuture(useMemoized(() => viewModel.fetchTodoList()));
+    final textEditingController = ref.watch(textControllerStateProvider);
 
-class _TodoPageState extends State<TodoPage> {
-  TodoDao todoDao = TodoDao();
-  List<Todo> _todoList = List.empty();
-  final textEditingController = TextEditingController();
+    final uiState =
+        ref.watch(todoViewModelProvider.select((value) => value.uiState));
 
-  _fetchTodoList() {
-    todoDao.getTodoList().then((value) => {
-          setState(() {
-            _todoList = value;
-          })
-        });
+    final Widget widget = uiState.when(
+        (values) => _buildSuccessWidget(
+              values,
+              textEditingController,
+              (todo) => viewModel.updateTodoData(todo),
+              () => {
+                if (textEditingController.text.isNotEmpty)
+                  {
+                    viewModel.addTodoData(
+                        Todo(title: textEditingController.text, done: false))
+                  }
+              },
+              () => viewModel.deleteTodoItems(),
+            ),
+        initial: () => Container(),
+        error: (error) => Center(child: Text(error)));
+    return widget;
   }
 
-  _onTapCardItem(Todo item) {
-    todoDao.update(item..done = true);
-    _fetchTodoList();
-  }
-
-  _onPressedAddButton() {
-    if (textEditingController.text.isEmpty) return;
-    final todo = Todo()
-      ..title = textEditingController.text
-      ..done = false;
-    todoDao.insert(todo);
-    textEditingController.clear();
-    _fetchTodoList();
-  }
-
-  _onPressedDeleteButton() {
-    if (_todoList.isEmpty) return;
-    todoDao.delete(_todoList[0].id!);
-    _fetchTodoList();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchTodoList();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    textEditingController.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  _buildSuccessWidget(
+    List<Todo> _todoList,
+    TextEditingController textEditingController,
+    void Function(Todo) onTapCardItem,
+    void Function() onPressedAddButton,
+    void Function() onPressedDeleteButton,
+  ) {
+    print("_buildSuccessWidget");
     return Scaffold(
       body: Container(
         child: Column(
@@ -79,15 +65,15 @@ class _TodoPageState extends State<TodoPage> {
                   itemCount: _todoList.length,
                   itemBuilder: (BuildContext context, int index) {
                     final item = _todoList[index];
-
                     return GestureDetector(
                       child: Card(
                         child: ListTile(
-                          title: Text('${item.title}'),
+                          title: Text(item.title ?? ""),
                           subtitle: Text('isDone: ${item.done}'),
                         ),
                       ),
-                      onTap: () => {_onTapCardItem(item)},
+                      onTap: () => onTapCardItem(
+                          Todo(id: item.id, title: item.title, done: true)),
                     );
                   }),
             ),
@@ -98,14 +84,14 @@ class _TodoPageState extends State<TodoPage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           FloatingActionButton(
-            onPressed: () => _onPressedAddButton(),
+            onPressed: () => onPressedAddButton(),
             child: const Icon(Icons.add),
           ),
           const SizedBox(
             height: 16,
           ),
           FloatingActionButton(
-            onPressed: () => _onPressedDeleteButton(),
+            onPressed: () => onPressedDeleteButton(),
             child: const Icon(Icons.delete),
           ),
         ],

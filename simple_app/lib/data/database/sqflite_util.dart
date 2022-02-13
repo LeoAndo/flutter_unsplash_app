@@ -5,7 +5,7 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 /// create the folder and returnes its path
-Future<String> initDb(String dbName) async {
+Future<String> initDatabase(String dbName) async {
   final databasePath = await getDatabasesPath();
   final path = join(databasePath, dbName);
   if (await Directory(dirname(path)).exists() == false) {
