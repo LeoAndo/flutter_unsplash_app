@@ -18,14 +18,14 @@ class PhotoListPage extends HookConsumerWidget {
         ref.watch(photoListViewModelProvider.select((value) => value.uiState));
     final Widget widget = uiState.when(
         (value) =>
-            _createSuccessWidget(value, () => {homeViewModel.searchPhotos()}),
+            _buildSuccessWidget(value, () => {homeViewModel.searchPhotos()}),
         initial: () => Container(),
         loading: () => const Loading(),
         error: (error) => Center(child: Text(error)));
     return widget;
   }
 
-  _createSuccessWidget(UnsplashResponse data, Function() onRefresh) {
+  _buildSuccessWidget(UnsplashResponse data, Function() onRefresh) {
     if (data.results.isEmpty) {
       return const Center(child: Text("no data!"));
     }
