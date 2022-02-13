@@ -47,7 +47,7 @@ class TodoDatabaseOpenHelper {
   }
 
   /// Get a todo.
-  Future<TodoEntity?> getTodo(int id) async {
+  Future<TodoEntity> getTodo(int id) async {
     final db = await _getDatabase(readOnly: true);
     final List<Map> maps = await db.query(tableTodo,
         columns: [columnId, columnDone, columnTitle],
@@ -56,7 +56,7 @@ class TodoDatabaseOpenHelper {
     if (maps.isNotEmpty) {
       return TodoEntity.fromMap(maps.first);
     }
-    return null;
+    return throw Exception("todo Item not found.");
   }
 
   Future<List<TodoEntity>> findTodoList() async {

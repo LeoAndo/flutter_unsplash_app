@@ -38,4 +38,10 @@ class TodoRepositoryImpl implements TodoRepository {
     Result.guardFuture(
         () => todoDatabaseOpenHelper.updateTodoItem(todo.toEntity()));
   }
+
+  @override
+  Future<Result<Todo>> findTodoItemById(int id) async {
+    return Result.guardFuture(() =>
+        todoDatabaseOpenHelper.getTodo(id).then((value) => value.toModel()));
+  }
 }
