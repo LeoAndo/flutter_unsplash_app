@@ -1,6 +1,6 @@
 # overview
 
-templaet for Flutter app.
+template for Flutter app.
 
 # [simple_app](https://github.com/LeoAndo/flutter-app-templates/tree/main/simple_app)
 
