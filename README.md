@@ -1,6 +1,6 @@
 # overview
 
-template for Flutter app.
+Flutter demo app.
 
 # App architecture
 
