@@ -6,8 +6,6 @@ template for Flutter app.
 
 <img width="582" alt="スクリーンショット 2021-12-20 15 58 59" src="https://user-images.githubusercontent.com/16476224/146725205-ac598f5f-c5a6-4cc4-8d38-559ca50bdf77.png">
 
-# [simple_app](https://github.com/LeoAndo/flutter-app-templates/tree/main/simple_app)
-
 ## capture
 
 | iPhone 13 Pro OS15.2 | Pixel 4 OS12 |
